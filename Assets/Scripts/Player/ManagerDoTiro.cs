@@ -6,9 +6,16 @@
 public class ManagerDoTiro : MonoBehaviour
 {
     [SerializeField] private Transform SpawnDoTiro;
-    [SerializeField] private GameObject Tiro;
-    private float Timer;
+    [SerializeField] private GameObject[] Tiro;
 
+    private Animator Anim;
+    private float Timer;
+    private int SpriteDoTiro = 0;
+
+    private void Start()
+    {
+        Anim = GetComponent<Animator>();
+    }
     private void Update()
     {
         //Utilizo um timer pra limitar o player a atirar apenas a cada quarto de segundo.
@@ -16,8 +23,16 @@ public class ManagerDoTiro : MonoBehaviour
 
         //Quando o player utilizar algum dos inputs, o tiro vai ser spawnado e o timer resetado
         if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.Space) && Timer >= 1f){
-            Instantiate(Tiro, SpawnDoTiro.position, Quaternion.identity);
+            Anim.SetTrigger("Atirar");
+            SpriteDoTiro++;
             Timer = 0f;
         }
+
+        if (SpriteDoTiro > 6) SpriteDoTiro = 0;
+    }
+
+    public void Atirar()
+    {
+        Instantiate(Tiro[SpriteDoTiro], SpawnDoTiro.position, Quaternion.identity);
     }
 }

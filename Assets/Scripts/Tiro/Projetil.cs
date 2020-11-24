@@ -5,8 +5,9 @@ using UnityEngine;
 /// Script que vai lidar com o disparo dos tiros
 /// </summary>
 
-//Utilizo um requipecomponent pra sempre aplicar um rigidbody no objeto que tiver esse script
+//Utilizo um requipecomponent pra sempre aplicar um rigidbody e um boxCollider no objeto
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class Projetil : MonoBehaviour
 {
     [SerializeField] private float VelocidadeDoDisparo;
@@ -27,5 +28,17 @@ public class Projetil : MonoBehaviour
     private void Update()
     {
         if (transform.position.y >= FinalPos.y) Destroy(gameObject);
+    }
+
+    //Um trigger pra destruir os alimentos que tocar, se for possível
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Alimentos"))
+        {
+            IDestruir DestruirAlimento = collision.GetComponent<IDestruir>();
+
+            if(DestruirAlimento != null) DestruirAlimento.Destruir();
+        }
+        Destroy(gameObject);
     }
 }
