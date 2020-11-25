@@ -11,6 +11,7 @@
 public class ManagerDoAlimento : MonoBehaviour, IDestruir
 {
     [SerializeField] private float Peso, Velocidade;
+    [SerializeField] private GameObject Efeito;
     [SerializeField] private int PontosDoAlimento;
     [SerializeField] private Animator Anim;
     private float VelocidadeFinal;
@@ -40,6 +41,7 @@ public class ManagerDoAlimento : MonoBehaviour, IDestruir
     public void Destruir()
     {
         Jogo.Pontuação += PontosDoAlimento;
+        Instantiate(Efeito, gameObject.transform.position, Quaternion.identity);
         Box.enabled = false;
         Anim.SetTrigger("Pegou");
     }

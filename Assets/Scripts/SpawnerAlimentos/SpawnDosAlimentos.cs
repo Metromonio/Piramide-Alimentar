@@ -2,7 +2,6 @@
 
 /// <summary>
 /// Script que vai ser responsavel pra ficar lançando alimentos na tela
-/// Vamos utilizar a Interface IDestruir pra ficar responsavel pela função de fazer algo quando atingido pelos tiros
 /// </summary>
 public class SpawnDosAlimentos : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class SpawnDosAlimentos : MonoBehaviour
     {
         Timer += Time.deltaTime;
 
-        if(Timer >= Jogo.TimerDificuldade) SpawnNoPonto(Random.Range(0, MaximoPontos));
+        if(Timer >= Jogo.TimerDificuldade && !Jogo.Pausado) SpawnNoPonto(Random.Range(0, MaximoPontos));
     }
 
     //Essa função vai pegar um alimento aleatorio e usar um pointer aleatorio pra determinar a posição

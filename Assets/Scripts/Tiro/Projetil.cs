@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Script que vai lidar com o disparo dos tiros
@@ -24,7 +23,7 @@ public class Projetil : MonoBehaviour
         Rb.AddForce(transform.up * VelocidadeDoDisparo);
     }
 
-    //Update pra destroir o projetil ao atingir X altura
+    //Update pra destruir o projetil ao atingir X altura
     private void Update()
     {
         if (transform.position.y >= FinalPos.y) Destroy(gameObject);
@@ -38,6 +37,7 @@ public class Projetil : MonoBehaviour
             IDestruir DestruirAlimento = collision.GetComponent<IDestruir>();
 
             if(DestruirAlimento != null) DestruirAlimento.Destruir();
+
         }
         Destroy(gameObject);
     }

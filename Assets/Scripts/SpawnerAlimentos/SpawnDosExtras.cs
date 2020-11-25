@@ -16,7 +16,7 @@ public class SpawnDosExtras : MonoBehaviour
     {
         Timer += Time.deltaTime;
 
-        if (Timer >= Jogo.TimerDificuldade) SpawnNoPonto(Random.Range(0, MaximoPontos));
+        if (Timer >= Jogo.TimerDificuldade && !Jogo.Pausado) SpawnNoPonto(Random.Range(0, MaximoPontos));
     }
 
     //Essa função vai pegar um alimento aleatorio e usar um pointer aleatorio pra determinar a posição

@@ -11,12 +11,14 @@
 public class ManagerDosExtras : MonoBehaviour, IDestruir
 {
     [SerializeField] private float Peso, Velocidade;
+    [SerializeField] private GameObject Efeito;
     [SerializeField] private bool Direita;
     [SerializeField] private Animator Anim;
     private float VelocidadeFinal;
 
     Rigidbody2D Rb;
     BoxCollider2D Box;
+    ManagerDasVidas Vidas;
 
     //Faço um calculo da velocidade final dividindo o peso pela velocidade
     public float CalculoDaVelocidade()
@@ -34,6 +36,10 @@ public class ManagerDosExtras : MonoBehaviour, IDestruir
         Rb = GetComponent<Rigidbody2D>();
         Box = GetComponent<BoxCollider2D>();
 
+        //Temos que procurar o script ManagerDasVidas pra referencia-lo
+        var ManagerDoJogo = GameObject.Find("ManagerDoJogo");
+        Vidas = ManagerDoJogo.GetComponent<ManagerDasVidas>();
+
         if(Direita) Rb.AddForce(transform.right * VelocidadeFinal);
         else if(!Direita) Rb.AddForce(-transform.right * VelocidadeFinal);
     }
@@ -41,6 +47,8 @@ public class ManagerDosExtras : MonoBehaviour, IDestruir
     public void Destruir()
     {
         Jogo.Vidas--;
+        Instantiate(Efeito, gameObject.transform.position, Quaternion.identity);
+        Vidas.DestruirVida(Jogo.Vidas);
         Box.enabled = false;
         Anim.SetTrigger("Pegou");
     }

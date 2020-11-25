@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Peso: 0.9
   Velocidade: 600
+  Efeito: {fileID: 7308955436471764753, guid: 0b55043ef39f6cf4da936f4a64958f47, type: 3}
   Direita: 0
   Anim: {fileID: 4418873965850919689}
 --- !u!1 &4044160197422556844

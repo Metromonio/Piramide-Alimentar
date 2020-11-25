@@ -18,11 +18,12 @@ public class ManagerDoTiro : MonoBehaviour
     }
     private void Update()
     {
+        if (Jogo.Pausado) return;
         //Utilizo um timer pra limitar o player a atirar apenas a cada quarto de segundo.
         Timer += Time.deltaTime;
 
         //Quando o player utilizar algum dos inputs, o tiro vai ser spawnado e o timer resetado
-        if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.Space) && Timer >= 1f){
+        if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.Space) && Timer >= .75f){
             Anim.SetTrigger("Atirar");
             SpriteDoTiro++;
             Timer = 0f;

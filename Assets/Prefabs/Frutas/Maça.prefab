@@ -170,6 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Peso: 1
   Velocidade: 600
+  Efeito: {fileID: 6276870351875099972, guid: 2ce44173adb7e5345a00e0daede111c4, type: 3}
   PontosDoAlimento: 5
   Anim: {fileID: 4692748672080480593}
 --- !u!61 &4957069455719871545
