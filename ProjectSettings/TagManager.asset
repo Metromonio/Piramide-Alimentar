@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Alimentos
+  - Sons
+  - OSTDoJog
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,7 @@ public class ManagerDosExtras : MonoBehaviour, IDestruir
     Rigidbody2D Rb;
     BoxCollider2D Box;
     ManagerDasVidas Vidas;
+    AudioSource Erro, FimDeJogo;
 
     //Faço um calculo da velocidade final dividindo o peso pela velocidade
     public float CalculoDaVelocidade()
@@ -30,11 +31,15 @@ public class ManagerDosExtras : MonoBehaviour, IDestruir
         return VelocidadeFinal;
     }
 
+    //Quando inciializado vamos fazer o calculo do peso e pegar componentes necessarios
+    //Tambem vamos determinar se o objeto sera jogado da direita ou esquerda
     private void Start()
     {
         CalculoDaVelocidade();
         Rb = GetComponent<Rigidbody2D>();
         Box = GetComponent<BoxCollider2D>();
+        Erro = GameObject.Find("Erro").GetComponent<AudioSource>();
+        FimDeJogo = GameObject.Find("FimDeJogo").GetComponent<AudioSource>();
 
         //Temos que procurar o script ManagerDasVidas pra referencia-lo
         var ManagerDoJogo = GameObject.Find("ManagerDoJogo");
@@ -44,8 +49,11 @@ public class ManagerDosExtras : MonoBehaviour, IDestruir
         else if(!Direita) Rb.AddForce(-transform.right * VelocidadeFinal);
     }
 
+    //Função da interface
     public void Destruir()
     {
+        if (Jogo.Vidas > 1) Erro.Play();
+        else if (Jogo.Vidas <= 1) FimDeJogo.Play();
         Jogo.Vidas--;
         Instantiate(Efeito, gameObject.transform.position, Quaternion.identity);
         Vidas.DestruirVida(Jogo.Vidas);

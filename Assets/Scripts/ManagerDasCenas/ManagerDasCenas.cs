@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class ManagerDasCenas : MonoBehaviour
 {
+    //Vai mudar de cena de acordo com o integer que colocarmos no Canvas
     public void MudarDeCena(int CenaParaIr)
     {
         SceneManager.LoadScene(CenaParaIr);
@@ -14,5 +15,12 @@ public class ManagerDasCenas : MonoBehaviour
     public void FecharJogo()
     {
         Application.Quit();
+    }
+
+    //Função pra mutar ou desmutar a musica
+    public void MutarMusica()
+    {
+        if (AudioListener.volume == 1f) AudioListener.volume = 0f;
+        else AudioListener.volume = 1f;
     }
 }
